@@ -65,10 +65,11 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 }
 
 .nav-logo img {
-  height: 40px; /* הקטנה קלה כדי שלא ילחץ על התפריט */
-  mix-blend-mode: screen; 
-  filter: brightness(1.1) contrast(1.1) drop-shadow(0 0 12px rgba(122, 88, 255, 0.7));
-  transition: all 0.3s ease;
+  height: 42px !important;
+  mix-blend-mode: screen !important; /* מכריח את הרקע הלבן להיעלם */
+  filter: brightness(1.3) contrast(1.2) drop-shadow(0 0 10px rgba(122,88,255,0.8)) !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
 }
 
 
@@ -178,19 +179,14 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 .brand-phone a{color:#0070f3;text-decoration:none;direction:ltr;display:inline-block;}
 .brand-phone a:hover{text-decoration:underline}
 
-/* ── HERO ── */
-.hero {
-  padding: 13rem 1.5rem 2rem; /* הגדלנו ל-13rem כדי להתרחק מהתפריט, צמצמנו ל-2rem למטה */
-  max-width: 860px;
-  margin: 0 auto;
+.hero{
+  padding: 13rem 1.5rem 2rem !important; /* רווח ענק מלמעלה, צמצום מלמטה */
+  text-align: center !important;
 }
 .hero h1 {
-  font-size: clamp(28px, 5vw, 48px);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-top: 0.2rem; /* צמצום רווח מהתג שמעליו */
-  margin-bottom: 0.5rem; /* צמצום רווח מהבועה שמתחתיו */
+  margin-top: 0.2rem !important; /* מצמצם רווח מהתג שמעליו */
+  line-height: 1.1 !important;
+  margin-bottom: 0.5rem !important;
 }
 .hero h1 span{color:#0070f3}
 .hero-bubble{position:relative;margin-bottom:1.45rem;border-radius:22px;padding:1.35rem 1.45rem;isolation:isolate;min-height:4.5em;box-shadow:0 0 0 1px rgba(0,180,255,0.2) inset,0 0 56px rgba(0,112,243,0.28),0 16px 48px rgba(0,0,0,0.4);}
@@ -272,43 +268,87 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   .portfolio-thumb{height:100px;}
 }
 
-/* ── PRICING — CYBER GLOW UPGRADE ── */
+/* ── PRICING — ELITE BOUTIQUE LOOK ── */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* שלישייה בשורה אחת */
-  gap: 24px;
-  align-items: stretch; /* גובה אחיד לכולם */
-  position: relative;
-  z-index: 1;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* כרטיסים צרים ומקצועיים */
+  gap: 20px;
+  align-items: stretch;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
 }
 
-/* Cyber-Glow Card base */
 .plan-card {
   height: 100%;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  border-radius: 24px;
-  padding: 2rem;
-  color: #fff;
-  position: relative;
+  padding: 2.2rem 1.8rem;
+  border-radius: 20px;
   background: rgba(16, 22, 35, 0.45);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(0, 112, 243, 0.25);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s, border-color 0.4s;
-  z-index: 1;
+  border: 1px solid rgba(0, 112, 243, 0.15);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  text-align: right;
 }
 
-/* הכרטיס הפופולרי - הגדלה עדינה וזוהר כחול */
+/* טקסטים קטנים ונקיים */
+.plan-card h3 { font-size: 20px !important; font-weight: 800; margin-bottom: 10px; color: #fff; }
+.plan-price { font-size: 28px !important; font-weight: 900; color: #0070f3; margin-bottom: 8px; }
+.plan-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; line-height: 1.4; }
+.plan-features { list-style: none; padding: 0; margin-bottom: 25px; flex-grow: 1; }
+.plan-features li { font-size: 13.5px !important; color: #c4c9d4; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.plan-features li .check { color: #0070f3; font-weight: bold; }
+.monthly { font-size: 12px; opacity: 0.4; margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
+
+/* הכרטיס הראשון - היחיד שזוהר כחול */
 .plan-card.popular {
-  transform: scale(1.02);
-  border: 2px solid #0070f3;
-  box-shadow: 0 0 35px rgba(0, 112, 243, 0.3);
+  transform: scale(1.03) !important;
+  border: 2px solid #0070f3 !important;
+  box-shadow: 0 0 35px rgba(0, 112, 243, 0.3) !important;
   background: rgba(16, 22, 35, 0.65);
   z-index: 10;
+}
+
+.popular-badge {
+  position: absolute; top: -15px; right: 25px;
+  background: #0070f3; color: #fff;
+  padding: 4px 14px; border-radius: 20px;
+  font-weight: 900; font-size: 10.5px;
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.5);
+}
+
+/* מחיר - גודל מקצועי */
+.plan-price {
+  font-size: 28px !important;
+  font-weight: 900;
+  color: #0070f3;
+  margin-bottom: 15px;
+}
+
+/* רשימת היתרונות - טקסט קטן ונקי */
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.plan-features li {
+  font-size: 14px;
+  color: #c4c9d4;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* הכרטיס הפופולרי - הגדלה עדינה מאוד וזוהר כחול */
+.plan-card.popular {
+  transform: scale(1.02) !important;
+  border: 2px solid #0070f3 !important;
+  box-shadow: 0 0 25px rgba(0, 112, 243, 0.25) !important;
+  z-index: 5;
 }
 
 /* אפקט מסגרת הניאון הזורמת */
@@ -896,64 +936,55 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   <p class="sec-sub reveal">מחירים ברורים, ללא הפתעות. כל המחירים + מע"מ. הנכס שלכם — שלכם לתמיד.</p>
   <div class="pricing-grid">
 
-    <!-- כרטיס חבילת Start - אתר תדמית (הכי פופולרי) -->
-<div class="plan-card reveal popular" data-delay="0" style="border: 2px solid #0070f3; box-shadow: 0 0 35px rgba(0,112,243,0.4); background: rgba(0,112,243,0.08); position: relative; transform: scale(1.05); z-index: 10; padding: 40px; border-radius: 32px;">
-  
-  <!-- התגית הזוהרת -->
-  <div style="position: absolute; top: -18px; right: 20px; background: #0070f3; color: #fff; padding: 6px 18px; border-radius: 20px; font-weight: 900; font-size: 13px; box-shadow: 0 5px 15px rgba(0,112,243,0.4); text-transform: uppercase;">הכי פופולרי</div>
-
-  <div class="plan-name" style="font-size: 24px; font-weight: 800; margin-bottom: 10px;">אתר תדמית מקצועי</div>
-  <div class="plan-price" style="font-size: 38px; font-weight: 900; color: #0070f3; margin-bottom: 10px;">3,200 ₪<span class="plan-vat" style="font-size: 14px; opacity: 0.6; margin-right: 5px;">+ מע"מ</span></div>
-  <div class="plan-sub" style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">הפתרון המושלם לעסקים בצמיחה</div>
-  <div class="plan-divider" style="height: 1px; background: rgba(0,112,243,0.2); margin-bottom: 20px;"></div>
-  
-  <ul class="plan-features" style="list-style: none; padding: 0; text-align: right;">
-    <li style="margin-bottom: 12px;"><span class="check" style="color: #0070f3; margin-left: 8px;">✓</span> עד 5 עמודים פרימיום</li>
-    <li style="margin-bottom: 12px;"><span class="check" style="color: #0070f3; margin-left: 8px;">✓</span> עיצוב AI יוקרתי ומותאם אישית</li>
-    <li style="margin-bottom: 12px;"><span class="check" style="color: #0070f3; margin-left: 8px;">✓</span> אינטגרציה מלאה: FB, IG, YT</li>
-    <li style="margin-bottom: 12px;"><span class="check" style="color: #0070f3; margin-left: 8px;">✓</span> טופס לידים וחיבור לוואטסאפ</li>
-    <li style="margin-bottom: 12px;"><span class="check" style="color: #0070f3; margin-left: 8px;">✓</span> מהירות טעינה מקסימלית</li>
+    <!-- חבילה 1: אתר תדמית (הכי פופולרי - זוהר) -->
+<div class="plan-card reveal popular" data-delay="0">
+  <div class="popular-badge">הכי פופולרי</div>
+  <div class="plan-name">אתר תדמית מקצועי</div>
+  <div class="plan-price">3,200 ₪<span class="plan-vat"> + מע"מ</span></div>
+  <div class="plan-sub">הפתרון המושלם לעסקים בצמיחה</div>
+  <div class="plan-divider"></div>
+  <ul class="plan-features">
+    <li><span class="check">✓</span> עד 5 עמודים פרימיום</li>
+    <li><span class="check">✓</span> עיצוב AI יוקרתי ומותאם אישית</li>
+    <li><span class="check">✓</span> אינטגרציה מלאה: FB, IG, YT</li>
+    <li><span class="check">✓</span> טופס לידים וחיבור לוואטסאפ</li>
+    <li><span class="check">✓</span> מהירות טעינה מקסימלית</li>
   </ul>
-  
-  <div class="monthly" style="margin-top: 25px; font-size: 13px; opacity: 0.5;">אחסון AWS: 99 ₪ + מע"מ / חודש</div>
+  <div class="monthly">אחסון AWS: 99 ₪ + מע"מ / חודש</div>
 </div>
 
-
-    <!-- Shop Plan (featured) -->
-    <div class="plan-card featured reveal" data-delay="1">
-      <div class="plan-badge">הכי פופולרי</div>
-      <div class="plan-name">Shop</div>
-      <div class="plan-price">4,500 ₪+<span class="plan-vat"> + מע"מ</span></div>
-      <div class="plan-sub">חנות דיגיטלית חכמה</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li><span class="check">✓</span> קטלוג מוצרים מהיר</li>
-        <li><span class="check">✓</span> סליקה מאובטחת (Stripe/PayPal)</li>
-        <li><span class="check">✓</span> ניהול מלאי</li>
-        <li><span class="check">✓</span> חוויית קנייה חלקה</li>
-        <li><span class="check">✓</span> ממשק ניהול מותאם</li>
-      </ul>
-      <div class="monthly">אחסון AWS: 199 ₪ + מע"מ / חודש</div>
-    </div>
-
-    <!-- Custom Plan -->
-    <div class="plan-card reveal" data-delay="2">
-      <div class="plan-name">Custom</div>
-      <div class="plan-price" style="font-size:24px;">7,000–15,000 ₪<span class="plan-vat"> + מע"מ</span></div>
-      <div class="plan-sub">אפליקציות ומערכות מותאמות</div>
-      <div class="plan-divider"></div>
-      <ul class="plan-features">
-        <li><span class="check">✓</span> מערכות CRM</li>
-        <li><span class="check">✓</span> תיאום תורים</li>
-        <li><span class="check">✓</span> מחשבונים חכמים</li>
-        <li><span class="check">✓</span> כל פתרון טכנולוגי שצריך</li>
-        <li><span class="check">✓</span> תמיכה VIP אישית</li>
-      </ul>
-      <div class="monthly">אחסון VIP: 299 ₪+ + מע"מ / חודש</div>
-    </div>
-
-  </div>
+<!-- חבילה 2: Shop (חנות דיגיטלית) -->
+<div class="plan-card reveal" data-delay="1">
+  <div class="plan-name">Shop</div>
+  <div class="plan-price">4,500 ₪+<span class="plan-vat"> + מע"מ</span></div>
+  <div class="plan-sub">חנות דיגיטלית חכמה</div>
+  <div class="plan-divider"></div>
+  <ul class="plan-features">
+    <li><span class="check">✓</span> קטלוג מוצרים מהיר</li>
+    <li><span class="check">✓</span> סליקה מאובטחת (Stripe/PayPal)</li>
+    <li><span class="check">✓</span> ניהול מלאי ומוצרים</li>
+    <li><span class="check">✓</span> חוויית קנייה חלקה במובייל</li>
+    <li><span class="check">✓</span> ממשק ניהול מותאם אישית</li>
+  </ul>
+  <div class="monthly">אחסון AWS: 199 ₪ + מע"מ / חודש</div>
 </div>
+
+<!-- חבילה 3: Custom (מערכות מותאמות) -->
+<div class="plan-card reveal" data-delay="2">
+  <div class="plan-name">Custom</div>
+  <div class="plan-price" style="font-size:24px;">7,000–15,000 ₪<span class="plan-vat"> + מע"מ</span></div>
+  <div class="plan-sub">אפליקציות ומערכות מותאמות</div>
+  <div class="plan-divider"></div>
+  <ul class="plan-features">
+    <li><span class="check">✓</span> מערכות CRM לניהול לקוחות</li>
+    <li><span class="check">✓</span> מערכות תיאום תורים חכמות</li>
+    <li><span class="check">✓</span> מחשבונים וכלים טכנולוגיים</li>
+    <li><span class="check">✓</span> פתרון טכנולוגי לכל צורך</li>
+    <li><span class="check">✓</span> תמיכה VIP אישית וצמודה</li>
+  </ul>
+  <div class="monthly">אחסון VIP: 299 ₪+ + מע"מ / חודש</div>
+</div>
+
 
 <div class="divider"></div>
 
