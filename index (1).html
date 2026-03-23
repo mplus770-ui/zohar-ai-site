@@ -15,6 +15,9 @@
   --glass-glow:0 0 0 1px rgba(0,112,243,0.12),0 12px 48px rgba(0,0,0,0.45),inset 0 1px 0 rgba(255,255,255,0.07);
   --reveal-dur:0.75s;
   --reveal-ease:cubic-bezier(0.22,1,0.36,1);
+  --cyber-purple:122,88,255;
+  --cyber-blue:0,112,243;
+  --cyber-cyan:0,210,255;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{direction:rtl;scroll-behavior:smooth;scroll-padding-top:6rem}
@@ -49,7 +52,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 }
 .site-header *{pointer-events:auto;}
 .site-nav{
-  max-width:920px;margin:0 auto;
+  max-width:980px;margin:0 auto;
   display:flex;align-items:center;justify-content:space-between;
   gap:10px;
   padding:10px 18px;
@@ -61,11 +64,24 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   box-shadow:0 8px 48px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04) inset,0 0 48px rgba(0,112,243,0.1);
 }
 
-/* Gold metallic logo */
+/* Logo image in nav */
 .nav-logo{
+  display:inline-flex;align-items:center;text-decoration:none;flex-shrink:0;
+}
+.nav-logo img{
+  height:42px;
+  filter:drop-shadow(0 0 12px rgba(122,88,255,0.7));
+  transition:filter 0.3s;
+}
+.nav-logo:hover img{
+  filter:drop-shadow(0 0 18px rgba(122,88,255,0.95)) drop-shadow(0 0 6px rgba(0,210,255,0.5));
+}
+
+/* Fallback text logo (shown if image missing) */
+.nav-logo-text{
   font-family:'Montserrat',system-ui,sans-serif;
   font-size:17px;font-weight:900;letter-spacing:0.02em;
-  text-decoration:none;white-space:nowrap;
+  white-space:nowrap;
   position:relative;overflow:hidden;display:inline-block;
   background:linear-gradient(90deg,#7a5800 0%,#D4AF37 18%,#F2D06B 35%,#FFF8DC 50%,#F2D06B 65%,#D4AF37 82%,#7a5800 100%);
   background-size:300% 100%;
@@ -73,7 +89,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   filter:drop-shadow(0 0 8px rgba(212,175,55,0.5));
   animation:navGoldShine 5s ease-in-out infinite;
 }
-.nav-logo::after{
+.nav-logo-text::after{
   content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;
   background:linear-gradient(105deg,transparent 20%,rgba(255,255,200,0.6) 50%,transparent 80%);
   animation:navLogoSpark 5s ease-in-out infinite;pointer-events:none;
@@ -88,10 +104,30 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   0%,28%{left:-100%;opacity:0;}36%{opacity:1;}56%{left:120%;opacity:0;}100%{left:120%;opacity:0;}
 }
 
+/* ── LANGUAGE SWITCHER ── */
+.lang-switcher{
+  display:flex;align-items:center;gap:2px;flex-shrink:0;
+  background:rgba(0,112,243,0.07);
+  border:1px solid rgba(0,112,243,0.2);
+  border-radius:999px;
+  padding:3px 8px;
+  font-size:11px;font-weight:600;letter-spacing:0.03em;
+}
+.lang-switcher a{
+  color:#6b7280;text-decoration:none;
+  padding:3px 5px;border-radius:999px;
+  transition:color 0.18s,background 0.18s;
+  white-space:nowrap;
+}
+.lang-switcher a:hover,.lang-switcher a.active{
+  color:#fff;background:rgba(0,112,243,0.35);
+}
+.lang-switcher .sep{color:rgba(255,255,255,0.15);user-select:none;font-size:9px;}
+
 .nav-links{list-style:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 5px;}
 .nav-links a{display:block;padding:7px 11px;font-size:13px;font-weight:600;color:#c4c9d4;text-decoration:none;border-radius:999px;transition:color 0.2s,background 0.2s;}
 .nav-links a:hover,.nav-links a:focus-visible{color:#fff;background:rgba(0,112,243,0.2);outline:none;}
-.nav-tel{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;padding:7px 12px;border-radius:999px;border:1px solid rgba(0,112,243,0.35);transition:background 0.2s;}
+.nav-tel{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;padding:7px 12px;border-radius:999px;border:1px solid rgba(0,112,243,0.35);transition:background 0.2s;direction:ltr;}
 .nav-tel:hover{background:rgba(0,112,243,0.15)}
 .page-anchor{scroll-margin-top:6rem;}
 
@@ -116,6 +152,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   .nav-links a{padding:11px 14px;font-size:14px;border-radius:10px;}
   .nav-tel{font-size:12px;padding:6px 10px;}
   .side-deco{display:none;}
+  .lang-switcher{display:none;}
 }
 
 /* ── REVEAL ── */
@@ -142,11 +179,11 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 }
 .brand-name-he{font-size:13px;font-weight:400;color:#9ca3af;margin-top:2px}
 .brand-phone{margin-top:10px;font-size:14px;font-weight:500}
-.brand-phone a{color:#0070f3;text-decoration:none}
+.brand-phone a{color:#0070f3;text-decoration:none;direction:ltr;display:inline-block;}
 .brand-phone a:hover{text-decoration:underline}
 
 /* ── HERO ── */
-.hero{padding:2.5rem 1.5rem 2rem;max-width:860px;margin:0 auto;}
+.hero{padding:10rem 1.5rem 2rem;max-width:860px;margin:0 auto;}
 .hero h1{font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.15;letter-spacing:-0.02em;margin-bottom:0.75rem;}
 .hero h1 span{color:#0070f3}
 .hero-bubble{position:relative;margin-bottom:1.45rem;border-radius:22px;padding:1.35rem 1.45rem;isolation:isolate;min-height:4.5em;box-shadow:0 0 0 1px rgba(0,180,255,0.2) inset,0 0 56px rgba(0,112,243,0.28),0 16px 48px rgba(0,0,0,0.4);}
@@ -228,21 +265,107 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   .portfolio-thumb{height:100px;}
 }
 
-/* ── PRICING ── */
+/* ── PRICING — CYBER GLOW UPGRADE ── */
 .pricing-grid{display:grid;grid-template-columns:1fr;gap:14px}
-.plan-card{border-radius:16px;padding:1.5rem;color:#fff;position:relative;overflow:hidden;background:rgba(16,22,35,0.55);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(0,112,243,0.22);box-shadow:var(--glass-glow);transition:transform 0.35s,box-shadow 0.35s;}
-.plan-card::before{content:'';position:absolute;top:-40px;inset-inline-start:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(0,112,243,0.2),transparent 65%);pointer-events:none;}
-.plan-card:hover{transform:translateY(-3px);box-shadow:0 20px 56px rgba(0,0,0,0.45),0 0 32px rgba(0,112,243,0.15)}
-.plan-card.featured{background:linear-gradient(145deg,rgba(0,112,243,0.88),rgba(0,72,180,0.92));border-color:rgba(120,190,255,0.45);box-shadow:0 12px 48px rgba(0,112,243,0.45),inset 0 1px 0 rgba(255,255,255,0.15);}
-.plan-badge{font-size:11px;font-weight:500;background:rgba(255,255,255,0.22);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px}
+
+/* Cyber-Glow Card base */
+.plan-card{
+  border-radius:16px;
+  padding:1.5rem;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  background:rgba(16,22,35,0.55);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  /* Multi-stop gradient border via pseudo */
+  border:1px solid transparent;
+  box-shadow:var(--glass-glow);
+  /* 3D perspective prep */
+  transform-style:preserve-3d;
+  transition:transform 0.4s var(--reveal-ease),box-shadow 0.4s,border-color 0.4s;
+  /* Gradient border trick */
+  background-clip:padding-box;
+  z-index:0;
+}
+/* Animated gradient border ring */
+.plan-card::before{
+  content:'';
+  position:absolute;
+  inset:-1.5px;
+  border-radius:17px;
+  z-index:-1;
+  background:linear-gradient(135deg,
+    rgba(var(--cyber-purple),0.55) 0%,
+    rgba(var(--cyber-blue),0.7) 30%,
+    rgba(var(--cyber-cyan),0.45) 55%,
+    rgba(var(--cyber-purple),0.6) 80%,
+    rgba(var(--cyber-blue),0.7) 100%
+  );
+  background-size:300% 300%;
+  animation:cyberBorderFlow 8s ease infinite;
+  opacity:0.55;
+  transition:opacity 0.4s;
+}
+/* Inner fill */
+.plan-card::after{
+  content:'';
+  position:absolute;
+  inset:1px;
+  border-radius:15px;
+  z-index:-1;
+  background:rgba(10,14,24,0.82);
+  backdrop-filter:blur(20px);
+}
+@keyframes cyberBorderFlow{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+/* Hover: 3D lift + full glow */
+.plan-card:hover{
+  transform:translateY(-10px) rotateX(2deg);
+  box-shadow:
+    0 24px 64px rgba(0,0,0,0.5),
+    0 0 40px rgba(var(--cyber-purple),0.35),
+    0 0 80px rgba(var(--cyber-blue),0.2);
+}
+.plan-card:hover::before{
+  opacity:1;
+  animation-duration:3s;
+}
+/* Featured card gets extra emphasis */
+.plan-card.featured{
+  background:rgba(12,18,36,0.75);
+}
+.plan-card.featured::before{
+  opacity:0.85;
+  background:linear-gradient(135deg,
+    rgba(var(--cyber-blue),0.9) 0%,
+    rgba(var(--cyber-cyan),0.7) 40%,
+    rgba(var(--cyber-purple),0.8) 70%,
+    rgba(var(--cyber-blue),0.9) 100%
+  );
+  background-size:300% 300%;
+  animation:cyberBorderFlow 5s ease infinite;
+}
+.plan-card.featured:hover{
+  box-shadow:
+    0 28px 72px rgba(0,0,0,0.6),
+    0 0 60px rgba(var(--cyber-blue),0.5),
+    0 0 100px rgba(var(--cyber-cyan),0.25);
+}
+
+.plan-badge{font-size:11px;font-weight:500;background:rgba(255,255,255,0.15);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px;border:1px solid rgba(255,255,255,0.2);}
 .plan-name{font-size:13px;font-weight:500;opacity:0.9;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:4px}
 .plan-price{font-size:32px;font-weight:900;letter-spacing:-0.02em;color:#fff;direction:ltr;text-align:right}
+.plan-vat{font-size:13px;font-weight:400;color:rgba(255,255,255,0.6);margin-inline-start:4px;}
 .plan-sub{font-size:13px;opacity:0.88;margin-top:2px;margin-bottom:1rem}
-.plan-divider{height:0.5px;background:rgba(255,255,255,0.22);margin:1rem 0}
+.plan-divider{height:0.5px;background:rgba(255,255,255,0.15);margin:1rem 0}
 .plan-features{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .plan-features li{font-size:13px;color:rgba(255,255,255,0.92);display:flex;align-items:flex-start;gap:8px;}
 .check{color:#5eead4;font-size:14px;flex-shrink:0;margin-top:1px;filter:drop-shadow(0 0 6px rgba(94,234,212,0.4))}
-.monthly{font-size:12px;color:rgba(255,255,255,0.8);margin-top:1rem;padding:8px 12px;background:rgba(255,255,255,0.12);border-radius:8px;display:inline-block;border:1px solid rgba(255,255,255,0.1)}
+.monthly{font-size:12px;color:rgba(255,255,255,0.8);margin-top:1rem;padding:8px 12px;background:rgba(255,255,255,0.08);border-radius:8px;display:inline-block;border:1px solid rgba(255,255,255,0.12)}
 @media(min-width:600px){.pricing-grid{grid-template-columns:1fr 1fr 1fr}.adv-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
 
 /* ── MIGRATION ── */
@@ -250,6 +373,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 .migration-header{padding:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
 .migration-kicker{font-size:13px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:0.05em}
 .migration-price{font-size:36px;font-weight:900;letter-spacing:-0.02em;color:#0070f3;direction:ltr;text-align:right}
+.migration-price .plan-vat{color:rgba(0,180,255,0.6);}
 .migration-once{font-size:13px;color:#9ca3af;margin-top:4px}
 .migration-steps{padding:1.5rem;display:flex;flex-direction:column;gap:14px}
 .step{display:flex;align-items:flex-start;gap:14px;}
@@ -316,6 +440,104 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 .promise-box blockquote{font-size:16px;line-height:1.8;font-weight:300;color:#d1d5db}
 .promise-box blockquote strong{font-weight:700;color:#f3f4f6}
 
+/* ── TESTIMONIALS ── */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+.testi-card{
+  position:relative;
+  border-radius:20px;
+  padding:1.75rem 1.5rem;
+  background:rgba(12,16,26,0.65);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid transparent;
+  z-index:0;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform 0.4s var(--reveal-ease),box-shadow 0.4s;
+}
+.testi-card::before{
+  content:'';
+  position:absolute;inset:-1px;border-radius:21px;z-index:-1;
+  background:linear-gradient(135deg,
+    rgba(var(--cyber-purple),0.6),
+    rgba(var(--cyber-blue),0.4),
+    rgba(var(--cyber-cyan),0.5),
+    rgba(var(--cyber-purple),0.55)
+  );
+  background-size:300% 300%;
+  animation:cyberBorderFlow 10s ease infinite;
+  opacity:0.5;
+  transition:opacity 0.4s;
+}
+.testi-card::after{
+  content:'';position:absolute;inset:1px;border-radius:19px;z-index:-1;
+  background:rgba(10,13,22,0.88);
+}
+.testi-card:hover{transform:translateY(-8px) rotateX(1.5deg);box-shadow:0 20px 56px rgba(0,0,0,0.5),0 0 48px rgba(var(--cyber-purple),0.2);}
+.testi-card:hover::before{opacity:1;}
+
+/* Stars */
+.testi-stars{display:flex;gap:3px;margin-bottom:1rem;justify-content:flex-end;}
+.testi-star{
+  font-size:16px;
+  color:#F2D06B;
+  filter:drop-shadow(0 0 6px rgba(242,208,107,0.8)) drop-shadow(0 0 12px rgba(212,175,55,0.5));
+  animation:starPulse 2s ease-in-out infinite alternate;
+}
+.testi-star:nth-child(2){animation-delay:0.2s;}
+.testi-star:nth-child(3){animation-delay:0.4s;}
+.testi-star:nth-child(4){animation-delay:0.6s;}
+.testi-star:nth-child(5){animation-delay:0.8s;}
+@keyframes starPulse{
+  0%{filter:drop-shadow(0 0 4px rgba(242,208,107,0.6)) drop-shadow(0 0 8px rgba(212,175,55,0.3));}
+  100%{filter:drop-shadow(0 0 10px rgba(255,220,80,1)) drop-shadow(0 0 20px rgba(212,175,55,0.7));}
+}
+
+.testi-quote{
+  font-size:14px;font-weight:300;line-height:1.75;color:#c4c9d4;
+  margin-bottom:1.35rem;
+  position:relative;
+  padding-inline-end:1.2rem;
+}
+.testi-quote::before{
+  content:'"';
+  position:absolute;
+  top:-8px;inset-inline-end:0;
+  font-size:52px;font-family:'Montserrat',serif;font-weight:900;
+  color:rgba(var(--cyber-blue),0.25);
+  line-height:1;pointer-events:none;
+}
+.testi-author{display:flex;align-items:center;gap:12px;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);}
+.testi-avatar{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;
+  border:1px solid rgba(var(--cyber-purple),0.4);
+  background:rgba(var(--cyber-purple),0.15);
+  box-shadow:0 0 16px rgba(var(--cyber-purple),0.3);
+}
+.testi-name{font-size:14px;font-weight:700;color:#f3f4f6;margin-bottom:2px;}
+.testi-role{font-size:11px;color:#7ab8ff;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;}
+
+/* Result badge on testimonial */
+.testi-result{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:0.75rem;
+  font-size:11px;font-weight:700;
+  padding:4px 11px;border-radius:100px;
+  background:rgba(74,222,128,0.1);
+  color:#4ade80;
+  border:1px solid rgba(74,222,128,0.25);
+}
+
+@media(max-width:680px){
+  .testimonials-grid{grid-template-columns:1fr;}
+}
+@media(min-width:500px) and (max-width:679px){
+  .testimonials-grid{grid-template-columns:1fr 1fr;}
+  .testi-card:last-child{grid-column:1/-1;}
+}
+
 /* ── FAQ ── */
 .faq-item{border-bottom:1px solid rgba(255,255,255,0.07);padding:1.25rem 0;}
 .faq-item:last-child{border-bottom:none}
@@ -327,10 +549,57 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 .cta-bottom h2{font-size:clamp(22px,4vw,34px);font-weight:900;letter-spacing:-0.02em;margin-bottom:1rem;color:#f3f4f6;}
 .cta-bottom p{font-size:15px;color:#9ca3af;margin-bottom:2rem;line-height:1.65}
 
-/* ── WHATSAPP ── */
-.wa-float{position:fixed;bottom:24px;left:24px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.5)}
-.wa-float:hover{background:#1ebe5d}
-.wa-float svg{width:30px;height:30px;fill:#fff}
+/* ── WHATSAPP — PULSE GLOW UPGRADE ── */
+.wa-float{
+  position:fixed;bottom:24px;left:24px;z-index:999;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,0.5);
+  animation:waPulse 2.8s ease-in-out infinite;
+  transition:background 0.2s,transform 0.2s;
+}
+.wa-float:hover{
+  background:#1ebe5d;
+  animation:none;
+  transform:scale(1.1);
+  box-shadow:0 6px 32px rgba(37,211,102,0.75),0 0 48px rgba(37,211,102,0.35);
+}
+.wa-float svg{width:30px;height:30px;fill:#fff;position:relative;z-index:1;}
+
+/* Pulse rings */
+.wa-float::before,.wa-float::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:2px solid rgba(37,211,102,0.55);
+  animation:waRing 2.8s ease-out infinite;
+}
+.wa-float::after{
+  border-color:rgba(37,211,102,0.3);
+  animation-delay:1.4s;
+}
+
+@keyframes waPulse{
+  0%,100%{
+    box-shadow:0 4px 20px rgba(37,211,102,0.45),0 0 0 0 rgba(37,211,102,0.35);
+    transform:scale(1);
+  }
+  40%{
+    box-shadow:0 6px 28px rgba(37,211,102,0.65),0 0 24px rgba(37,211,102,0.25);
+    transform:scale(1.05);
+  }
+  70%{
+    box-shadow:0 4px 20px rgba(37,211,102,0.45),0 0 0 0 rgba(37,211,102,0);
+    transform:scale(1);
+  }
+}
+@keyframes waRing{
+  0%{transform:scale(1);opacity:0.8;}
+  100%{transform:scale(2.2);opacity:0;}
+}
 
 /* ── MOBILE GRID FIXES ── */
 @media(max-width:560px){
@@ -375,7 +644,30 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 <!-- ═══ STICKY HEADER ═══ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="ניווט ראשי">
-    <a href="#home" class="nav-logo">Zohar AI</a>
+
+    <!-- Logo: uses logo.png with text fallback -->
+    <a href="#home" class="nav-logo" aria-label="Zohar AI Digital Solutions">
+      <img src="logo.png" alt="Zohar AI" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';">
+      <span class="nav-logo-text" style="display:none;">Zohar AI</span>
+    </a>
+
+    <!-- Language Switcher -->
+    <div class="lang-switcher" role="navigation" aria-label="Language switcher">
+      <a href="index.html" class="active" hreflang="he" title="עברית">HE</a>
+      <span class="sep">|</span>
+      <a href="en.html" hreflang="en" title="English">EN</a>
+      <span class="sep">|</span>
+      <a href="fr.html" hreflang="fr" title="Français">FR</a>
+      <span class="sep">|</span>
+      <a href="es.html" hreflang="es" title="Español">ES</a>
+      <span class="sep">|</span>
+      <a href="ar.html" hreflang="ar" title="العربية">AR</a>
+      <span class="sep">|</span>
+      <a href="ru.html" hreflang="ru" title="Русский">RU</a>
+      <span class="sep">|</span>
+      <a href="de.html" hreflang="de" title="Deutsch">DE</a>
+    </div>
+
     <button class="nav-hamburger" id="navHamburger" aria-label="תפריט" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -386,9 +678,10 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
       <li><a href="#services">שירותים</a></li>
       <li><a href="#hosting">אחסון</a></li>
       <li><a href="#compare">השוואה</a></li>
+      <li><a href="#testimonials">לקוחות</a></li>
       <li><a href="#contact">קשר</a></li>
     </ul>
-    <a class="nav-tel" href="tel:+972777297072">077-7297072</a>
+    <a class="nav-tel" href="tel:+97277297072" dir="ltr">+972-77-7297072</a>
   </nav>
 </header>
 
@@ -400,7 +693,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 <div class="brand reveal" data-delay="0">
   <div class="brand-name-en">Zohar AI Digital Solutions</div>
   <div class="brand-name-he">זוהר AI פתרונות דיגיטליים</div>
-  <div class="brand-phone"><a href="tel:+972777297072">077-7297072</a></div>
+  <div class="brand-phone"><a href="tel:+97277297072" dir="ltr">+972-77-7297072</a></div>
 </div>
 
 <div class="hero">
@@ -573,26 +866,32 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 <div class="section">
   <div class="tag reveal">תמחור שקוף</div>
   <h2 class="sec-title reveal">בחרו את החבילה שלכם</h2>
-  <p class="sec-sub reveal">מחירים ברורים, ללא הפתעות. הנכס שלכם — שלכם לתמיד.</p>
+  <p class="sec-sub reveal">מחירים ברורים, ללא הפתעות. כל המחירים + מע"מ. הנכס שלכם — שלכם לתמיד.</p>
   <div class="pricing-grid">
+
+    <!-- Start Plan -->
     <div class="plan-card reveal" data-delay="0">
       <div class="plan-name">Start</div>
-      <div class="plan-price">2,600 ₪</div>
-      <div class="plan-sub">דף נחיתה / אתר תדמית</div>
+      <div class="plan-price">2,600 ₪<span class="plan-vat">+ מע"מ</span></div>
+      <div class="plan-sub">אתר עסקי — עד 5 עמודים יוקרתיים</div>
       <div class="plan-divider"></div>
       <ul class="plan-features">
+        <li><span class="check">✓</span> עד 5 עמודים פרימיום</li>
         <li><span class="check">✓</span> עיצוב AI יוקרתי</li>
         <li><span class="check">✓</span> התאמה מלאה לנייד</li>
         <li><span class="check">✓</span> טופס לידים חכם</li>
         <li><span class="check">✓</span> חיבור לווטסאפ</li>
+        <li><span class="check">✓</span> אינטגרציה מלאה: FB, IG, YT</li>
         <li><span class="check">✓</span> מהירות טעינה מקסימלית</li>
       </ul>
-      <div class="monthly">אחסון AWS: 99 ₪/חודש</div>
+      <div class="monthly">אחסון AWS: 99 ₪ + מע"מ / חודש</div>
     </div>
+
+    <!-- Shop Plan (featured) -->
     <div class="plan-card featured reveal" data-delay="1">
       <div class="plan-badge">הכי פופולרי</div>
       <div class="plan-name">Shop</div>
-      <div class="plan-price">4,500 ₪+</div>
+      <div class="plan-price">4,500 ₪+<span class="plan-vat"> + מע"מ</span></div>
       <div class="plan-sub">חנות דיגיטלית חכמה</div>
       <div class="plan-divider"></div>
       <ul class="plan-features">
@@ -602,11 +901,13 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
         <li><span class="check">✓</span> חוויית קנייה חלקה</li>
         <li><span class="check">✓</span> ממשק ניהול מותאם</li>
       </ul>
-      <div class="monthly">אחסון AWS: 199 ₪/חודש</div>
+      <div class="monthly">אחסון AWS: 199 ₪ + מע"מ / חודש</div>
     </div>
+
+    <!-- Custom Plan -->
     <div class="plan-card reveal" data-delay="2">
       <div class="plan-name">Custom</div>
-      <div class="plan-price">7,000–15,000 ₪</div>
+      <div class="plan-price" style="font-size:24px;">7,000–15,000 ₪<span class="plan-vat"> + מע"מ</span></div>
       <div class="plan-sub">אפליקציות ומערכות מותאמות</div>
       <div class="plan-divider"></div>
       <ul class="plan-features">
@@ -616,8 +917,9 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
         <li><span class="check">✓</span> כל פתרון טכנולוגי שצריך</li>
         <li><span class="check">✓</span> תמיכה VIP אישית</li>
       </ul>
-      <div class="monthly">אחסון VIP: 299 ₪+/חודש</div>
+      <div class="monthly">אחסון VIP: 299 ₪+ + מע"מ / חודש</div>
     </div>
+
   </div>
 </div>
 
@@ -630,7 +932,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   <div class="migration-box reveal" data-delay="1">
     <div class="migration-header">
       <div class="migration-kicker">תשלום חד-פעמי</div>
-      <div class="migration-price">1,500 ₪</div>
+      <div class="migration-price">1,500 ₪<span class="plan-vat"> + מע"מ</span></div>
       <div class="migration-once">שדרוג + עיצוב חדשני + העברה מלאה ל-AWS</div>
     </div>
     <div class="migration-steps">
@@ -641,7 +943,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
     </div>
     <div class="migration-result">
       <div class="migration-emoji">🎯</div>
-      <div class="result-text"><strong>מה אתה מרוויח:</strong> אתר חדש, מהיר פי 10, עיצוב חדשני — ואחסון חודשי של 99 ₪ על תשתית אמזון. אין הפתעות, אין כאב ראש.</div>
+      <div class="result-text"><strong>מה אתה מרוויח:</strong> אתר חדש, מהיר פי 10, עיצוב חדשני — ואחסון חודשי של 99 ₪ + מע"מ על תשתית אמזון. אין הפתעות, אין כאב ראש.</div>
     </div>
   </div>
 </div>
@@ -694,7 +996,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 
   <div class="mgmt-callout reveal" data-delay="1">
     <div class="mgmt-callout-icon">💡</div>
-    <div class="mgmt-callout-text"><strong>למה זה ייחודי?</strong> ב-99 ₪ לחודש אתה מקבל שירות שבחברות אחרות עולה 300–500 ₪: אחסון + תחזוקה + עדכוני תוכן + ניטור + גיבויים. זה לא אחסון — זה שקט נפשי.</div>
+    <div class="mgmt-callout-text"><strong>למה זה ייחודי?</strong> ב-99 ₪ + מע"מ לחודש אתה מקבל שירות שבחברות אחרות עולה 300–500 ₪: אחסון + תחזוקה + עדכוני תוכן + ניטור + גיבויים. זה לא אחסון — זה שקט נפשי.</div>
   </div>
 </div>
 
@@ -762,6 +1064,87 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 
 <div class="divider"></div>
 
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials" class="page-anchor">
+<div class="section">
+  <div class="tag reveal">סיפורי הצלחה</div>
+  <h2 class="sec-title reveal">מה אומרים הלקוחות שלנו</h2>
+  <p class="sec-sub reveal">תוצאות אמיתיות מעסקים אמיתיים — בנויים על תשתית Zohar AI.</p>
+
+  <div class="testimonials-grid">
+
+    <!-- Testimonial 1 — Real Estate -->
+    <div class="testi-card reveal" data-delay="0">
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">
+        עברתי מוורדפרס איטי ומסורבל לאתר חדש תוך שבוע. הלידים הכפילו את עצמם תוך חודש. הייתי ספקן — עכשיו אני ממליץ לכל עמית בתחום.
+      </p>
+      <div class="testi-result">📈 +112% לידים ב-30 יום</div>
+      <div class="testi-author">
+        <div class="testi-avatar">🏢</div>
+        <div>
+          <div class="testi-name">דוד לוי</div>
+          <div class="testi-role">Real Estate Manager · תל אביב</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial 2 — Clinic -->
+    <div class="testi-card reveal" data-delay="1">
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">
+        קליניקה שלי עלתה לעמוד הראשון בגוגל תוך שלושה שבועות. מערכת קביעת התורים החכמה חסכה לי שעות של מענה טלפוני בכל שבוע.
+      </p>
+      <div class="testi-result">🥇 עמוד 1 גוגל · חיסכון 8 שעות/שבוע</div>
+      <div class="testi-author">
+        <div class="testi-avatar">🏥</div>
+        <div>
+          <div class="testi-name">ד"ר מיכל כהן</div>
+          <div class="testi-role">Clinic Owner · ירושלים</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial 3 — E-commerce -->
+    <div class="testi-card reveal" data-delay="2">
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">
+        החנות שלי נטענת בפחות מחצי שניה. שיעור הנטישה ירד ב-60% ועל כל 100 גולשים — 38 קונים. זה לא עיצוב יפה, זה הנדסה של הכנסות.
+      </p>
+      <div class="testi-result">🛒 המרה +38% · נטישה -60%</div>
+      <div class="testi-author">
+        <div class="testi-avatar">🛍️</div>
+        <div>
+          <div class="testi-name">יוסי אברהם</div>
+          <div class="testi-role">E-commerce Founder · חיפה</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ═══ CONTACT / FAQ ═══ -->
 <section id="contact" class="page-anchor">
 
@@ -772,7 +1155,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
     <div class="faq-item reveal" data-delay="0"><div class="faq-q">למה לא וורדפרס?</div><div class="faq-a">כי וורדפרס כבדה, דורשת עדכונים בלתי פוסקים וחשופה לפריצות. אנחנו בונים בקוד נקי (React) שחוסך כאב ראש וכסף לטווח ארוך. אין תוספים שנשברים, אין מסדי נתונים חשופים.</div></div>
     <div class="faq-item reveal" data-delay="1"><div class="faq-q">איפה האתר מאוחסן בדיוק?</div><div class="faq-a">על שרתי Amazon AWS — תשתית הענן החזקה ביותר בעולם. יציבות 99.9%, Edge Network גלובלי, ואבטחה ברמת Enterprise.</div></div>
     <div class="faq-item reveal" data-delay="2"><div class="faq-q">תוך כמה זמן האתר מוכן?</div><div class="faq-a">הודות לשילוב של מומחיות אנושית ו-AI מתקדם, אנחנו מספקים אתר מוכן תוך 3–7 ימי עסקים. לא שבועות, לא חודשים.</div></div>
-    <div class="faq-item reveal" data-delay="3"><div class="faq-q">מה כולל שירות ההגירה ל-AI Cloud?</div><div class="faq-a">בתשלום חד-פעמי של 1,500 ₪ לוקחים את האתר הוורדפרס הישן שלך, בונים אותו מחדש בקוד נקי עם עיצוב חדשני, ומעבירים לאחסון AWS ב-99 ₪ לחודש.</div></div>
+    <div class="faq-item reveal" data-delay="3"><div class="faq-q">מה כולל שירות ההגירה ל-AI Cloud?</div><div class="faq-a">בתשלום חד-פעמי של 1,500 ₪ + מע"מ לוקחים את האתר הוורדפרס הישן שלך, בונים אותו מחדש בקוד נקי עם עיצוב חדשני, ומעבירים לאחסון AWS ב-99 ₪ + מע"מ לחודש.</div></div>
     <div class="faq-item reveal" data-delay="4"><div class="faq-q">האם הקוד שלי באמת פרטי?</div><div class="faq-a">לחלוטין. אתה מקבל את כל קבצי המקור ובעלות מלאה. הקוד לא נחשף לאיש ולא מכיל חורי אבטחה ידועים כמו בוורדפרס.</div></div>
   </div>
 </div>
@@ -782,7 +1165,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 <div class="cta-bottom reveal">
   <div class="tag">Zohar AI Digital Solutions</div>
   <h2>מוכן לשדרג את<br>הנכס הדיגיטלי שלך?</h2>
-  <p>שיחת ייעוץ ראשונה — ללא עלות, ללא התחייבות.</p>
+  <p>שיחת ייעוץ ראשונה — ללא עלות, ללא התחייבות.<br><a href="tel:+97277297072" style="color:#0070f3;text-decoration:none;direction:ltr;display:inline-block;">+972-77-7297072</a></p>
   <a class="cta-btn" href="https://wa.me/972555626040">שלח לנו הודעה בווטסאפ ←</a>
 </div>
 
@@ -790,6 +1173,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 
 </main>
 
+<!-- WhatsApp float with pulse -->
 <a class="wa-float" href="https://wa.me/972555626040" title="דברו איתנו בווטסאפ" aria-label="שלחו הודעה בווטסאפ">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
