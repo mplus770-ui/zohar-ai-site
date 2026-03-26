@@ -44,7 +44,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 
 /* ── STICKY NAV ── */
 .site-main{position:relative;z-index:2;}
-.site-main--with-nav{padding-top:8rem;}
+.site-main--with-nav{padding-top:5.5rem;}
 .site-header{
   position:fixed;top:0;left:0;right:0;z-index:950;
   padding:0.6rem 1rem;
@@ -64,33 +64,17 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   box-shadow:0 8px 48px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04) inset,0 0 48px rgba(0,112,243,0.1);
 }
 
-/* FIX 5: Logo image — proper size, image only, no text */
-.nav-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
 .nav-logo img {
-  max-height: 60px;
-  height: 60px;
-  width: auto;
-  display: block;
-  filter: drop-shadow(0 0 10px rgba(122,88,255,0.6));
+  height: 42px !important;
+  mix-blend-mode: screen !important; /* מכריח את הרקע הלבן להיעלם */
+  filter: brightness(1.3) contrast(1.2) drop-shadow(0 0 10px rgba(122,88,255,0.8)) !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
 }
 
-/* FIX 2: "Zohar AI" text — gold effect, single line, left of logo */
-/* gold keyframes */
-@keyframes navGoldShine{
-  0%{background-position:200% center;filter:drop-shadow(0 0 6px rgba(212,175,55,0.35));}
-  40%{background-position:0% center;filter:drop-shadow(0 0 16px rgba(242,208,107,0.75));}
-  70%{background-position:-60% center;filter:drop-shadow(0 0 10px rgba(212,175,55,0.5));}
-  100%{background-position:200% center;filter:drop-shadow(0 0 6px rgba(212,175,55,0.35));}
-}
-@keyframes navLogoSpark{
-  0%,28%{left:-100%;opacity:0;}36%{opacity:1;}56%{left:120%;opacity:0;}100%{left:120%;opacity:0;}
-}
+
+
+/* Fallback text logo (shown if image missing) */
 .nav-logo-text{
   font-family:'Montserrat',system-ui,sans-serif;
   font-size:17px;font-weight:900;letter-spacing:0.02em;
@@ -106,6 +90,15 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;
   background:linear-gradient(105deg,transparent 20%,rgba(255,255,200,0.6) 50%,transparent 80%);
   animation:navLogoSpark 5s ease-in-out infinite;pointer-events:none;
+}
+@keyframes navGoldShine{
+  0%{background-position:200% center;filter:drop-shadow(0 0 6px rgba(212,175,55,0.35));}
+  40%{background-position:0% center;filter:drop-shadow(0 0 16px rgba(242,208,107,0.75));}
+  70%{background-position:-60% center;filter:drop-shadow(0 0 10px rgba(212,175,55,0.5));}
+  100%{background-position:200% center;filter:drop-shadow(0 0 6px rgba(212,175,55,0.35));}
+}
+@keyframes navLogoSpark{
+  0%,28%{left:-100%;opacity:0;}36%{opacity:1;}56%{left:120%;opacity:0;}100%{left:120%;opacity:0;}
 }
 
 /* ── LANGUAGE SWITCHER ── */
@@ -170,13 +163,8 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 .sec-title{font-size:clamp(22px,4vw,30px);font-weight:900;letter-spacing:-0.02em;margin-bottom:0.5rem;}
 .sec-sub{font-size:15px;color:#9ca3af;margin-bottom:2rem;line-height:1.6;}
 
-/* ── BRAND — FIX 2: margin-top to separate from nav, no extra line spacing ── */
-.brand{
-  padding:0 1.5rem 0;
-  max-width:860px;
-  margin:1.5rem auto 0; /* FIX: top margin separates from nav */
-  text-align:right;
-}
+/* ── BRAND ── */
+.brand{padding:1.5rem 1.5rem 0;max-width:860px;margin:0 auto;}
 .brand-name-en{
   font-family:'Montserrat',system-ui,sans-serif;
   font-size:24px;font-weight:900;display:inline-block;
@@ -185,30 +173,27 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 10px rgba(212,175,55,0.45));
   animation:navGoldShine 5s ease-in-out infinite;
-  line-height:1.3; /* FIX: no extra gap between lines */
 }
-.brand-name-he{font-size:13px;font-weight:400;color:#9ca3af;line-height:1.3;margin-top:0;} /* FIX: tight spacing */
-.brand-phone{font-size:14px;font-weight:500;line-height:1.3;margin-top:0;} /* FIX: tight spacing */
+.brand-name-he{font-size:13px;font-weight:400;color:#9ca3af;margin-top:2px}
+.brand-phone{margin-top:10px;font-size:14px;font-weight:500}
 .brand-phone a{color:#0070f3;text-decoration:none;direction:ltr;display:inline-block;}
 .brand-phone a:hover{text-decoration:underline}
 
-/* FIX 1: HERO — right-aligned, narrow max-width, visually on the right */
+/*
 .hero {
-  max-width: 760px;
-  margin-right: auto !important;
-  margin-left: auto !important;
-  padding: 2.5rem 1.5rem 2rem;
-  text-align: right;
-  display: block;
+    padding: 12rem 1.5rem 3rem !important;
+    text-align: right;
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: 0;
 }
 
 .hero h1 {
-  font-size: clamp(32px, 5.5vw, 58px);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
+    font-size: clamp(32px, 6vw, 58px) !important;
+    max-width: 700px;
+    line-height: 1.1;
 }
+*/
 .hero h1 span{color:#0070f3}
 .hero-bubble{position:relative;margin-bottom:1.45rem;border-radius:22px;padding:1.35rem 1.45rem;isolation:isolate;min-height:4.5em;box-shadow:0 0 0 1px rgba(0,180,255,0.2) inset,0 0 56px rgba(0,112,243,0.28),0 16px 48px rgba(0,0,0,0.4);}
 .hero-bubble::before{content:'';position:absolute;inset:-2px;border-radius:24px;z-index:-2;background:linear-gradient(125deg,rgba(0,112,243,0.85),rgba(0,40,120,0.4),rgba(80,180,255,0.55),rgba(0,112,243,0.7),rgba(0,60,180,0.5));background-size:320% 320%;animation:bubbleGlow 9s ease-in-out infinite alternate;filter:blur(0.5px);}
@@ -289,15 +274,15 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   .portfolio-thumb{height:100px;}
 }
 
-/* ── PRICING ── */
+/* ── PRICING — ELITE BOUTIQUE LOOK ── */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* כרטיסים צרים ומקצועיים */
   gap: 20px;
   align-items: stretch;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 4rem 1.5rem;
 }
 
 .plan-card {
@@ -312,34 +297,18 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   text-align: right;
-  overflow: visible;
 }
 
+/* טקסטים קטנים ונקיים */
 .plan-card h3 { font-size: 20px !important; font-weight: 800; margin-bottom: 10px; color: #fff; }
-.plan-price { font-size: 28px !important; font-weight: 900; color: #0070f3; margin-bottom: 8px; direction:ltr; text-align:right; }
+.plan-price { font-size: 28px !important; font-weight: 900; color: #0070f3; margin-bottom: 8px; }
 .plan-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; line-height: 1.4; }
 .plan-features { list-style: none; padding: 0; margin-bottom: 25px; flex-grow: 1; }
 .plan-features li { font-size: 13.5px !important; color: #c4c9d4; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 .plan-features li .check { color: #0070f3; font-weight: bold; }
-.plan-divider{height:0.5px;background:rgba(255,255,255,0.15);margin:1rem 0}
-.plan-vat{font-size:13px;font-weight:400;color:rgba(255,255,255,0.55);margin-inline-start:3px;}
-.plan-name{font-size:13px;font-weight:500;opacity:0.9;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:4px;}
-.plan-badge{font-size:11px;font-weight:500;background:rgba(255,255,255,0.15);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px;border:1px solid rgba(255,255,255,0.2);}
+.monthly { font-size: 12px; opacity: 0.4; margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
 
-/* FIX 3: Hosting line highlight — soft green, only .monthly */
-.monthly {
-  font-size: 12px;
-  margin-top: auto;
-  padding: 8px 12px;
-  border-radius: 8px;
-  display: inline-block;
-  /* FIX: soft transparent green background highlight */
-  background: rgba(74, 222, 128, 0.08);
-  border: 1px solid rgba(74, 222, 128, 0.22);
-  color: rgba(200, 255, 220, 0.9);
-}
-
-/* Popular card */
+/* הכרטיס הראשון - היחיד שזוהר כחול */
 .plan-card.popular {
   transform: scale(1.03) !important;
   border: 2px solid #0070f3 !important;
@@ -356,7 +325,39 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   box-shadow: 0 4px 12px rgba(0, 112, 243, 0.5);
 }
 
-/* Neon border flow */
+/* מחיר - גודל מקצועי */
+.plan-price {
+  font-size: 28px !important;
+  font-weight: 900;
+  color: #0070f3;
+  margin-bottom: 15px;
+}
+
+/* רשימת היתרונות - טקסט קטן ונקי */
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.plan-features li {
+  font-size: 14px;
+  color: #c4c9d4;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* הכרטיס הפופולרי - הגדלה עדינה מאוד וזוהר כחול */
+.plan-card.popular {
+  transform: scale(1.02) !important;
+  border: 2px solid #0070f3 !important;
+  box-shadow: 0 0 25px rgba(0, 112, 243, 0.25) !important;
+  z-index: 5;
+}
+
+/* אפקט מסגרת הניאון הזורמת */
 .plan-card::before {
   content: '';
   position: absolute;
@@ -375,19 +376,39 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   opacity: 0.55;
   transition: opacity 0.4s;
 }
+
+/* אפקט מעבר עכבר (Hover) */
 .plan-card:hover {
   transform: translateY(-10px) rotateX(2deg);
   border-color: #0070f3;
   box-shadow: 0 15px 45px rgba(0, 112, 243, 0.4);
 }
-.plan-card:hover::before { opacity: 1; }
+
+.plan-card:hover::before {
+  opacity: 1;
+}
 
 @keyframes cyberBorderFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-.plan-card.featured{background:rgba(12,18,36,0.75);}
+/* Hover: 3D lift + full glow */
+.plan-card:hover{
+  transform:translateY(-10px) rotateX(2deg);
+  box-shadow:
+    0 24px 64px rgba(0,0,0,0.5),
+    0 0 40px rgba(var(--cyber-purple),0.35),
+    0 0 80px rgba(var(--cyber-blue),0.2);
+}
+.plan-card:hover::before{
+  opacity:1;
+  animation-duration:3s;
+}
+/* Featured card gets extra emphasis */
+.plan-card.featured{
+  background:rgba(12,18,36,0.75);
+}
 .plan-card.featured::before{
   opacity:0.85;
   background:linear-gradient(135deg,
@@ -399,19 +420,27 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   background-size:300% 300%;
   animation:cyberBorderFlow 5s ease infinite;
 }
-
-/* FIX 4: Migration box — restore clean rounded transparent box */
-.migration-box{
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(14,18,28,0.5);
-  backdrop-filter: blur(18px) saturate(145%);
-  -webkit-backdrop-filter: blur(18px) saturate(145%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-glow);
-  /* ensure it is contained in its section */
-  margin-top: 0;
+.plan-card.featured:hover{
+  box-shadow:
+    0 28px 72px rgba(0,0,0,0.6),
+    0 0 60px rgba(var(--cyber-blue),0.5),
+    0 0 100px rgba(var(--cyber-cyan),0.25);
 }
+
+.plan-badge{font-size:11px;font-weight:500;background:rgba(255,255,255,0.15);color:#fff;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px;border:1px solid rgba(255,255,255,0.2);}
+.plan-name{font-size:13px;font-weight:500;opacity:0.9;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:4px}
+.plan-price{font-size:32px;font-weight:900;letter-spacing:-0.02em;color:#fff;direction:ltr;text-align:right}
+.plan-vat{font-size:13px;font-weight:400;color:rgba(255,255,255,0.6);margin-inline-start:4px;}
+.plan-sub{font-size:13px;opacity:0.88;margin-top:2px;margin-bottom:1rem}
+.plan-divider{height:0.5px;background:rgba(255,255,255,0.15);margin:1rem 0}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.plan-features li{font-size:13px;color:rgba(255,255,255,0.92);display:flex;align-items:flex-start;gap:8px;}
+.check{color:#5eead4;font-size:14px;flex-shrink:0;margin-top:1px;filter:drop-shadow(0 0 6px rgba(94,234,212,0.4))}
+.monthly{font-size:12px;color:rgba(255,255,255,0.8);margin-top:1rem;padding:8px 12px;background:rgba(255,255,255,0.08);border-radius:8px;display:inline-block;border:1px solid rgba(255,255,255,0.12)}
+@media(min-width:600px){.pricing-grid{grid-template-columns:1fr 1fr 1fr}.adv-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+
+/* ── MIGRATION ── */
+.migration-box{border-radius:16px;overflow:hidden;background:rgba(14,18,28,0.5);backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%);border:1px solid var(--glass-border);box-shadow:var(--glass-glow);}
 .migration-header{padding:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
 .migration-kicker{font-size:13px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:0.05em}
 .migration-price{font-size:36px;font-weight:900;letter-spacing:-0.02em;color:#0070f3;direction:ltr;text-align:right}
@@ -456,7 +485,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 .privacy-item-text{font-size:13px;color:#c4c9d4;line-height:1.55}
 .privacy-item-text strong{color:#f3f4f6;font-weight:600;display:block;margin-bottom:2px}
 
-/* ── COMPARE ── */
+/* ── COMPARE — with mobile scroll ── */
 .compare-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--glass-border);box-shadow:var(--glass-glow);}
 .compare-wrap{min-width:480px;overflow:hidden;background:rgba(10,14,22,0.4);backdrop-filter:blur(12px);}
 .compare-table{width:100%;border-collapse:collapse;font-size:14px}
@@ -485,33 +514,100 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 /* ── TESTIMONIALS ── */
 .testimonials-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
 .testi-card{
-  position:relative;border-radius:20px;padding:1.75rem 1.5rem;
+  position:relative;
+  border-radius:20px;
+  padding:1.75rem 1.5rem;
   background:rgba(12,16,26,0.65);
-  backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
-  border:1px solid transparent;z-index:0;overflow:hidden;
-  transform-style:preserve-3d;transition:transform 0.4s var(--reveal-ease),box-shadow 0.4s;
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid transparent;
+  z-index:0;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform 0.4s var(--reveal-ease),box-shadow 0.4s;
 }
 .testi-card::before{
-  content:'';position:absolute;inset:-1px;border-radius:21px;z-index:-1;
-  background:linear-gradient(135deg,rgba(var(--cyber-purple),0.6),rgba(var(--cyber-blue),0.4),rgba(var(--cyber-cyan),0.5),rgba(var(--cyber-purple),0.55));
-  background-size:300% 300%;animation:cyberBorderFlow 10s ease infinite;opacity:0.5;transition:opacity 0.4s;
+  content:'';
+  position:absolute;inset:-1px;border-radius:21px;z-index:-1;
+  background:linear-gradient(135deg,
+    rgba(var(--cyber-purple),0.6),
+    rgba(var(--cyber-blue),0.4),
+    rgba(var(--cyber-cyan),0.5),
+    rgba(var(--cyber-purple),0.55)
+  );
+  background-size:300% 300%;
+  animation:cyberBorderFlow 10s ease infinite;
+  opacity:0.5;
+  transition:opacity 0.4s;
 }
-.testi-card::after{content:'';position:absolute;inset:1px;border-radius:19px;z-index:-1;background:rgba(10,13,22,0.88);}
+.testi-card::after{
+  content:'';position:absolute;inset:1px;border-radius:19px;z-index:-1;
+  background:rgba(10,13,22,0.88);
+}
 .testi-card:hover{transform:translateY(-8px) rotateX(1.5deg);box-shadow:0 20px 56px rgba(0,0,0,0.5),0 0 48px rgba(var(--cyber-purple),0.2);}
 .testi-card:hover::before{opacity:1;}
+
+/* Stars */
 .testi-stars{display:flex;gap:3px;margin-bottom:1rem;justify-content:flex-end;}
-.testi-star{font-size:16px;color:#F2D06B;filter:drop-shadow(0 0 6px rgba(242,208,107,0.8)) drop-shadow(0 0 12px rgba(212,175,55,0.5));animation:starPulse 2s ease-in-out infinite alternate;}
-.testi-star:nth-child(2){animation-delay:0.2s;}.testi-star:nth-child(3){animation-delay:0.4s;}.testi-star:nth-child(4){animation-delay:0.6s;}.testi-star:nth-child(5){animation-delay:0.8s;}
-@keyframes starPulse{0%{filter:drop-shadow(0 0 4px rgba(242,208,107,0.6));}100%{filter:drop-shadow(0 0 10px rgba(255,220,80,1)) drop-shadow(0 0 20px rgba(212,175,55,0.7));}}
-.testi-quote{font-size:14px;font-weight:300;line-height:1.75;color:#c4c9d4;margin-bottom:1.35rem;position:relative;padding-inline-end:1.2rem;}
-.testi-quote::before{content:'"';position:absolute;top:-8px;inset-inline-end:0;font-size:52px;font-family:'Montserrat',serif;font-weight:900;color:rgba(var(--cyber-blue),0.25);line-height:1;pointer-events:none;}
+.testi-star{
+  font-size:16px;
+  color:#F2D06B;
+  filter:drop-shadow(0 0 6px rgba(242,208,107,0.8)) drop-shadow(0 0 12px rgba(212,175,55,0.5));
+  animation:starPulse 2s ease-in-out infinite alternate;
+}
+.testi-star:nth-child(2){animation-delay:0.2s;}
+.testi-star:nth-child(3){animation-delay:0.4s;}
+.testi-star:nth-child(4){animation-delay:0.6s;}
+.testi-star:nth-child(5){animation-delay:0.8s;}
+@keyframes starPulse{
+  0%{filter:drop-shadow(0 0 4px rgba(242,208,107,0.6)) drop-shadow(0 0 8px rgba(212,175,55,0.3));}
+  100%{filter:drop-shadow(0 0 10px rgba(255,220,80,1)) drop-shadow(0 0 20px rgba(212,175,55,0.7));}
+}
+
+.testi-quote{
+  font-size:14px;font-weight:300;line-height:1.75;color:#c4c9d4;
+  margin-bottom:1.35rem;
+  position:relative;
+  padding-inline-end:1.2rem;
+}
+.testi-quote::before{
+  content:'"';
+  position:absolute;
+  top:-8px;inset-inline-end:0;
+  font-size:52px;font-family:'Montserrat',serif;font-weight:900;
+  color:rgba(var(--cyber-blue),0.25);
+  line-height:1;pointer-events:none;
+}
 .testi-author{display:flex;align-items:center;gap:12px;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07);}
-.testi-avatar{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px;border:1px solid rgba(var(--cyber-purple),0.4);background:rgba(var(--cyber-purple),0.15);box-shadow:0 0 16px rgba(var(--cyber-purple),0.3);}
+.testi-avatar{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;
+  border:1px solid rgba(var(--cyber-purple),0.4);
+  background:rgba(var(--cyber-purple),0.15);
+  box-shadow:0 0 16px rgba(var(--cyber-purple),0.3);
+}
 .testi-name{font-size:14px;font-weight:700;color:#f3f4f6;margin-bottom:2px;}
 .testi-role{font-size:11px;color:#7ab8ff;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;}
-.testi-result{display:inline-flex;align-items:center;gap:6px;margin-top:0.75rem;font-size:11px;font-weight:700;padding:4px 11px;border-radius:100px;background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.25);}
-@media(max-width:680px){.testimonials-grid{grid-template-columns:1fr;}}
-@media(min-width:500px) and (max-width:679px){.testimonials-grid{grid-template-columns:1fr 1fr;}.testi-card:last-child{grid-column:1/-1;}}
+
+/* Result badge on testimonial */
+.testi-result{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:0.75rem;
+  font-size:11px;font-weight:700;
+  padding:4px 11px;border-radius:100px;
+  background:rgba(74,222,128,0.1);
+  color:#4ade80;
+  border:1px solid rgba(74,222,128,0.25);
+}
+
+@media(max-width:680px){
+  .testimonials-grid{grid-template-columns:1fr;}
+}
+@media(min-width:500px) and (max-width:679px){
+  .testimonials-grid{grid-template-columns:1fr 1fr;}
+  .testi-card:last-child{grid-column:1/-1;}
+}
 
 /* ── FAQ ── */
 .faq-item{border-bottom:1px solid rgba(255,255,255,0.07);padding:1.25rem 0;}
@@ -524,20 +620,57 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 .cta-bottom h2{font-size:clamp(22px,4vw,34px);font-weight:900;letter-spacing:-0.02em;margin-bottom:1rem;color:#f3f4f6;}
 .cta-bottom p{font-size:15px;color:#9ca3af;margin-bottom:2rem;line-height:1.65}
 
-/* ── WHATSAPP ── */
+/* ── WHATSAPP — PULSE GLOW UPGRADE ── */
 .wa-float{
   position:fixed;bottom:24px;left:24px;z-index:999;
   width:56px;height:56px;border-radius:50%;
-  background:#25D366;display:flex;align-items:center;justify-content:center;
-  text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.5);
-  animation:waPulse 2.8s ease-in-out infinite;transition:background 0.2s,transform 0.2s;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,0.5);
+  animation:waPulse 2.8s ease-in-out infinite;
+  transition:background 0.2s,transform 0.2s;
 }
-.wa-float:hover{background:#1ebe5d;animation:none;transform:scale(1.1);box-shadow:0 6px 32px rgba(37,211,102,0.75),0 0 48px rgba(37,211,102,0.35);}
+.wa-float:hover{
+  background:#1ebe5d;
+  animation:none;
+  transform:scale(1.1);
+  box-shadow:0 6px 32px rgba(37,211,102,0.75),0 0 48px rgba(37,211,102,0.35);
+}
 .wa-float svg{width:30px;height:30px;fill:#fff;position:relative;z-index:1;}
-.wa-float::before,.wa-float::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid rgba(37,211,102,0.55);animation:waRing 2.8s ease-out infinite;}
-.wa-float::after{border-color:rgba(37,211,102,0.3);animation-delay:1.4s;}
-@keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.45);transform:scale(1);}40%{box-shadow:0 6px 28px rgba(37,211,102,0.65);transform:scale(1.05);}70%{box-shadow:0 4px 20px rgba(37,211,102,0.45);transform:scale(1);}}
-@keyframes waRing{0%{transform:scale(1);opacity:0.8;}100%{transform:scale(2.2);opacity:0;}}
+
+/* Pulse rings */
+.wa-float::before,.wa-float::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:2px solid rgba(37,211,102,0.55);
+  animation:waRing 2.8s ease-out infinite;
+}
+.wa-float::after{
+  border-color:rgba(37,211,102,0.3);
+  animation-delay:1.4s;
+}
+
+@keyframes waPulse{
+  0%,100%{
+    box-shadow:0 4px 20px rgba(37,211,102,0.45),0 0 0 0 rgba(37,211,102,0.35);
+    transform:scale(1);
+  }
+  40%{
+    box-shadow:0 6px 28px rgba(37,211,102,0.65),0 0 24px rgba(37,211,102,0.25);
+    transform:scale(1.05);
+  }
+  70%{
+    box-shadow:0 4px 20px rgba(37,211,102,0.45),0 0 0 0 rgba(37,211,102,0);
+    transform:scale(1);
+  }
+}
+@keyframes waRing{
+  0%{transform:scale(1);opacity:0.8;}
+  100%{transform:scale(2.2);opacity:0;}
+}
 
 /* ── MOBILE GRID FIXES ── */
 @media(max-width:560px){
@@ -546,7 +679,9 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   .mgmt-grid{grid-template-columns:1fr}
   .privacy-grid{grid-template-columns:1fr}
 }
-@media(max-width:400px){.adv-grid{grid-template-columns:1fr}}
+@media(max-width:400px){
+  .adv-grid{grid-template-columns:1fr}
+}
 
 /* ── REDUCE MOTION ── */
 @media(prefers-reduced-motion:reduce){
@@ -555,61 +690,24 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   .reveal{opacity:1;transform:none;}
   .typing-cursor{opacity:0;width:0;}
 }
+.section {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+/* תיקון ה‑Hero — מרכז כמו במצב המקורי */
+.hero {
+  max-width: 900px;        /* מגביל רוחב */
+  margin: 12rem auto 3rem; /* מרכז את כל הבלוק */
+  padding: 0 1.5rem;
+  text-align: center;      /* מרכז את הטקסט */
+}
 
-/* FIX 6: Privacy Policy Modal */
-.pp-trigger{
-  display:inline-block;
-  font-size:12px;color:#7ab8ff;cursor:pointer;
-  text-decoration:underline;text-underline-offset:3px;
-  opacity:0.75;transition:opacity 0.2s;
-  margin-top:0.5rem;
+.hero h1 {
+  max-width: 700px;        /* מונע מהכותרת להימרח */
+  margin: 0 auto;          /* מרכז את הכותרת */
+  line-height: 1.1;
 }
-.pp-trigger:hover{opacity:1;}
-.pp-modal-overlay{
-  display:none;position:fixed;inset:0;z-index:9000;
-  background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);
-  align-items:center;justify-content:center;padding:1.5rem;
-}
-.pp-modal-overlay.open{display:flex;}
-.pp-modal{
-  max-width:680px;width:100%;max-height:82vh;
-  border-radius:20px;
-  background:rgba(10,14,24,0.97);
-  border:1px solid rgba(0,112,243,0.3);
-  box-shadow:0 24px 64px rgba(0,0,0,0.7),0 0 48px rgba(0,112,243,0.12);
-  display:flex;flex-direction:column;overflow:hidden;
-}
-.pp-modal-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.25rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);
-  flex-shrink:0;
-}
-.pp-modal-head h3{font-size:17px;font-weight:700;color:#f3f4f6;}
-.pp-close{
-  background:none;border:none;cursor:pointer;
-  color:#9ca3af;font-size:20px;padding:4px 8px;
-  border-radius:8px;transition:color 0.2s,background 0.2s;
-  line-height:1;
-}
-.pp-close:hover{color:#fff;background:rgba(255,255,255,0.08);}
-.pp-modal-body{padding:1.5rem;overflow-y:auto;font-size:13.5px;color:#c4c9d4;line-height:1.75;}
-.pp-modal-body h4{font-size:14px;font-weight:700;color:#f3f4f6;margin:1.25rem 0 0.4rem;}
-.pp-modal-body h4:first-child{margin-top:0;}
-.pp-modal-body p{margin-bottom:0.75rem;}
-
-/* FIX: Accessibility button */
-.a11y-btn{
-  position:fixed;bottom:90px;left:24px;z-index:998;
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(0,112,243,0.85);
-  border:2px solid rgba(0,112,243,0.5);
-  box-shadow:0 4px 16px rgba(0,112,243,0.4);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:#fff;font-size:18px;
-  transition:background 0.2s,transform 0.2s;
-  text-decoration:none;
-}
-.a11y-btn:hover{background:#0070f3;transform:scale(1.1);}
 </style>
 </head>
 <body>
@@ -636,13 +734,12 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 <header class="site-header">
   <nav class="site-nav" aria-label="ניווט ראשי">
 
-    <!-- FIX 2 & 5: Logo image + "Zohar AI" gold text to its LEFT (RTL: inline-start) -->
-    <a href="#home" class="nav-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
-      <!-- FIX 2: gold "Zohar AI" text, single line, to the left of the image -->
-      <span class="nav-logo-text">Zohar AI</span>
-      <!-- FIX 5: image only, max-height 60-80px -->
-      <img src="logo.png" alt="" style="max-height:65px;height:65px;width:auto;display:block;filter:drop-shadow(0 0 10px rgba(122,88,255,0.6));">
-    </a>
+    <!-- Logo: uses logo.png with text side-by-side -->
+    <a href="#home" class="nav-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+      <img src="logo.png" style="height: 42px; vertical-align: middle;">
+      <span style="font-family:'Montserrat'; font-weight:900; font-size:22px; color:#fff; text-transform:uppercase;">Zohar AI</span>
+    </a>    
+
 
     <!-- Language Switcher -->
     <div class="lang-switcher" role="navigation" aria-label="Language switcher">
@@ -673,6 +770,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
       <li><a href="#compare">השוואה</a></li>
       <li><a href="#testimonials">לקוחות</a></li>
       <li><a href="#contact">צור קשר</a></li>
+
     </ul>
     <a class="nav-tel" href="tel:+97277297072" dir="ltr">+972-77-7297072</a>
   </nav>
@@ -683,14 +781,12 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 <!-- ═══ HOME ═══ -->
 <section id="home" class="page-anchor">
 
-<!-- FIX 2: margin-top separates from nav, lines tight, no extra gap -->
 <div class="brand reveal" data-delay="0">
   <div class="brand-name-en">Zohar AI Digital Solutions</div>
   <div class="brand-name-he">זוהר AI פתרונות דיגיטליים</div>
   <div class="brand-phone"><a href="tel:+97277297072" dir="ltr">+972-77-7297072</a></div>
 </div>
 
-<!-- FIX 1: Hero — right-aligned, not center, matches screenshot -->
 <div class="hero">
   <div class="tag reveal" data-delay="0">הדור הבא של הדיגיטל</div>
   <h1 class="reveal" data-delay="1">הנכס הדיגיטלי שלך<br><span>מגיע לעשות יותר.</span></h1>
@@ -764,8 +860,15 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   <p class="sec-sub reveal">כל אתר נבנה בקוד נקי על תשתית AWS — מהיר, מאובטח ומדויק לעסק.</p>
 
   <div class="portfolio-grid">
+
+    <!-- אתר 1 — lemondesepharade -->
     <a class="portfolio-card reveal" data-delay="0" href="http://lemondesepharade.co.il/" target="_blank" rel="noopener noreferrer">
-      <div class="portfolio-thumb pt-lemon"><div class="portfolio-thumb-inner"><span class="portfolio-badge">אתר תדמית</span><span class="portfolio-badge">🏆 יוקרתי</span></div></div>
+      <div class="portfolio-thumb pt-lemon">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-badge">אתר תדמית</span>
+          <span class="portfolio-badge">🏆 יוקרתי</span>
+        </div>
+      </div>
       <div class="portfolio-body">
         <div class="portfolio-title">Le Monde Séfarade</div>
         <div class="portfolio-type">אתר תדמית יוקרתי — תרבות וקהילה</div>
@@ -778,8 +881,15 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
         <div class="portfolio-link">lemondesepharade.co.il</div>
       </div>
     </a>
+
+    <!-- אתר 2 — Eco-Tech Israel -->
     <a class="portfolio-card reveal" data-delay="1" href="https://ecot.co.il/" target="_blank" rel="noopener noreferrer">
-      <div class="portfolio-thumb pt-eco"><div class="portfolio-thumb-inner"><span class="portfolio-badge">טכנולוגי</span><span class="portfolio-badge">♻️ ירוק</span></div></div>
+      <div class="portfolio-thumb pt-eco">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-badge">טכנולוגי</span>
+          <span class="portfolio-badge">♻️ ירוק</span>
+        </div>
+      </div>
       <div class="portfolio-body">
         <div class="portfolio-title">Eco-Tech Israel</div>
         <div class="portfolio-type">אתר חברה טכנולוגית חדשנית</div>
@@ -792,8 +902,15 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
         <div class="portfolio-link">ecot.co.il</div>
       </div>
     </a>
+
+    <!-- אתר 3 — Urban Fashion Store -->
     <a class="portfolio-card reveal" data-delay="2" href="https://theme389-urban-fashion.myshopify.com/" target="_blank" rel="noopener noreferrer">
-      <div class="portfolio-thumb pt-urban"><div class="portfolio-thumb-inner"><span class="portfolio-badge">חנות</span><span class="portfolio-badge">👗 אופנה</span></div></div>
+      <div class="portfolio-thumb pt-urban">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-badge">חנות</span>
+          <span class="portfolio-badge">👗 אופנה</span>
+        </div>
+      </div>
       <div class="portfolio-body">
         <div class="portfolio-title">Urban Fashion Store</div>
         <div class="portfolio-type">חנות בגדים דיגיטלית מהירה בטירוף</div>
@@ -806,8 +923,15 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
         <div class="portfolio-link">urban-fashion.myshopify.com</div>
       </div>
     </a>
+
+    <!-- אתר 4 — Gourmet Delivery -->
     <a class="portfolio-card reveal" data-delay="3" href="https://www.gourmet-deliveries.net/" target="_blank" rel="noopener noreferrer">
-      <div class="portfolio-thumb pt-gourmet"><div class="portfolio-thumb-inner"><span class="portfolio-badge">e-Commerce</span><span class="portfolio-badge">🍾 בוטיק</span></div></div>
+      <div class="portfolio-thumb pt-gourmet">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-badge">e-Commerce</span>
+          <span class="portfolio-badge">🍾 בוטיק</span>
+        </div>
+      </div>
       <div class="portfolio-body">
         <div class="portfolio-title">Gourmet Delivery</div>
         <div class="portfolio-type">חנות בוטיק למשלוחי מזון יוקרתיים</div>
@@ -820,6 +944,7 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
         <div class="portfolio-link">gourmet-deliveries.net</div>
       </div>
     </a>
+
   </div>
 </div>
 </section>
@@ -833,73 +958,64 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   <div class="tag reveal">תמחור שקוף</div>
   <h2 class="sec-title reveal">בחרו את החבילה שלכם</h2>
   <p class="sec-sub reveal">מחירים ברורים, ללא הפתעות. כל המחירים + מע"מ. הנכס שלכם — שלכם לתמיד.</p>
+  <div class="pricing-grid">
+
+    <!-- חבילה 1: אתר תדמית (הכי פופולרי - זוהר) -->
+<div class="plan-card reveal popular" data-delay="0">
+  <div class="popular-badge">הכי פופולרי</div>
+  <div class="plan-name">אתר תדמית מקצועי</div>
+  <div class="plan-price">3,200 ₪<span class="plan-vat"> + מע"מ</span></div>
+  <div class="plan-sub">הפתרון המושלם לעסקים בצמיחה</div>
+  <div class="plan-divider"></div>
+  <ul class="plan-features">
+    <li><span class="check">✓</span> עד 5 עמודים פרימיום</li>
+    <li><span class="check">✓</span> עיצוב AI יוקרתי ומותאם אישית</li>
+    <li><span class="check">✓</span> אינטגרציה מלאה: FB, IG, YT</li>
+    <li><span class="check">✓</span> טופס לידים וחיבור לוואטסאפ</li>
+    <li><span class="check">✓</span> מהירות טעינה מקסימלית</li>
+  </ul>
+  <div class="monthly">אחסון AWS: 99 ₪ + מע"מ / חודש</div>
 </div>
 
-<!-- FIX 3: pricing cards with green-highlighted .monthly line -->
-<div class="pricing-grid">
-
-  <!-- חבילה 1: הכי פופולרי -->
-  <div class="plan-card reveal popular" data-delay="0">
-    <div class="popular-badge">הכי פופולרי</div>
-    <div class="plan-name">אתר תדמית מקצועי</div>
-    <div class="plan-price">3,200 ₪<span class="plan-vat"> + מע"מ</span></div>
-    <div class="plan-sub">הפתרון המושלם לעסקים בצמיחה</div>
-    <div class="plan-divider"></div>
-    <ul class="plan-features">
-      <li><span class="check">✓</span> עד 5 עמודים פרימיום</li>
-      <li><span class="check">✓</span> עיצוב AI יוקרתי ומותאם אישית</li>
-      <li><span class="check">✓</span> אינטגרציה מלאה: FB, IG, YT</li>
-      <li><span class="check">✓</span> טופס לידים וחיבור לוואטסאפ</li>
-      <li><span class="check">✓</span> מהירות טעינה מקסימלית</li>
-    </ul>
-    <!-- FIX 3: green highlight on this line only -->
-    <div class="monthly">אחסון AWS: 99 ₪ + מע"מ / חודש</div>
-  </div>
-
-  <!-- חבילה 2: Shop -->
-  <div class="plan-card reveal" data-delay="1">
-    <div class="plan-name">Shop</div>
-    <div class="plan-price">4,500 ₪+<span class="plan-vat"> + מע"מ</span></div>
-    <div class="plan-sub">חנות דיגיטלית חכמה</div>
-    <div class="plan-divider"></div>
-    <ul class="plan-features">
-      <li><span class="check">✓</span> קטלוג מוצרים מהיר</li>
-      <li><span class="check">✓</span> סליקה מאובטחת (Stripe/PayPal)</li>
-      <li><span class="check">✓</span> ניהול מלאי ומוצרים</li>
-      <li><span class="check">✓</span> חוויית קנייה חלקה במובייל</li>
-      <li><span class="check">✓</span> ממשק ניהול מותאם אישית</li>
-    </ul>
-    <!-- FIX 3: green highlight -->
-    <div class="monthly">אחסון AWS: 199 ₪ + מע"מ / חודש</div>
-  </div>
-
-  <!-- חבילה 3: Custom -->
-  <div class="plan-card reveal" data-delay="2">
-    <div class="plan-name">Custom</div>
-    <div class="plan-price" style="font-size:22px;">7,000–15,000 ₪<span class="plan-vat"> + מע"מ</span></div>
-    <div class="plan-sub">אפליקציות ומערכות מותאמות</div>
-    <div class="plan-divider"></div>
-    <ul class="plan-features">
-      <li><span class="check">✓</span> מערכות CRM לניהול לקוחות</li>
-      <li><span class="check">✓</span> מערכות תיאום תורים חכמות</li>
-      <li><span class="check">✓</span> מחשבונים וכלים טכנולוגיים</li>
-      <li><span class="check">✓</span> פתרון טכנולוגי לכל צורך</li>
-      <li><span class="check">✓</span> תמיכה VIP אישית וצמודה</li>
-    </ul>
-    <!-- FIX 3: green highlight -->
-    <div class="monthly">אחסון VIP: 299 ₪+ + מע"מ / חודש</div>
-  </div>
-
+<!-- חבילה 2: Shop (חנות דיגיטלית) -->
+<div class="plan-card reveal" data-delay="1">
+  <div class="plan-name">Shop</div>
+  <div class="plan-price">4,500 ₪+<span class="plan-vat"> + מע"מ</span></div>
+  <div class="plan-sub">חנות דיגיטלית חכמה</div>
+  <div class="plan-divider"></div>
+  <ul class="plan-features">
+    <li><span class="check">✓</span> קטלוג מוצרים מהיר</li>
+    <li><span class="check">✓</span> סליקה מאובטחת (Stripe/PayPal)</li>
+    <li><span class="check">✓</span> ניהול מלאי ומוצרים</li>
+    <li><span class="check">✓</span> חוויית קנייה חלקה במובייל</li>
+    <li><span class="check">✓</span> ממשק ניהול מותאם אישית</li>
+  </ul>
+  <div class="monthly">אחסון AWS: 199 ₪ + מע"מ / חודש</div>
 </div>
+
+<!-- חבילה 3: Custom (מערכות מותאמות) -->
+<div class="plan-card reveal" data-delay="2">
+  <div class="plan-name">Custom</div>
+  <div class="plan-price" style="font-size:24px;">7,000–15,000 ₪<span class="plan-vat"> + מע"מ</span></div>
+  <div class="plan-sub">אפליקציות ומערכות מותאמות</div>
+  <div class="plan-divider"></div>
+  <ul class="plan-features">
+    <li><span class="check">✓</span> מערכות CRM לניהול לקוחות</li>
+    <li><span class="check">✓</span> מערכות תיאום תורים חכמות</li>
+    <li><span class="check">✓</span> מחשבונים וכלים טכנולוגיים</li>
+    <li><span class="check">✓</span> פתרון טכנולוגי לכל צורך</li>
+    <li><span class="check">✓</span> תמיכה VIP אישית וצמודה</li>
+  </ul>
+  <div class="monthly">אחסון VIP: 299 ₪+ + מע"מ / חודש</div>
+</div>
+
 
 <div class="divider"></div>
 
-<!-- FIX 4: Migration box — restored clean rounded box, properly closed inside section -->
 <div class="section">
   <div class="tag reveal">שירות מיוחד</div>
   <h2 class="sec-title reveal">הגירה ל-AI Cloud</h2>
   <p class="sec-sub reveal">יש לך אתר וורדפרס ישן? אנחנו משדרגים אותו לקוד נקי ומודרני ומעבירים אותך לענן של אמזון בתשלום חד-פעמי.</p>
-  <!-- FIX 4: migration-box is properly inside .section, styles restored -->
   <div class="migration-box reveal" data-delay="1">
     <div class="migration-header">
       <div class="migration-kicker">תשלום חד-פעמי</div>
@@ -1041,34 +1157,75 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   <div class="tag reveal">סיפורי הצלחה</div>
   <h2 class="sec-title reveal">מה אומרים הלקוחות שלנו</h2>
   <p class="sec-sub reveal">תוצאות אמיתיות מעסקים אמיתיים — בנויים על תשתית Zohar AI.</p>
+
   <div class="testimonials-grid">
+
+    <!-- Testimonial 1 — Real Estate -->
     <div class="testi-card reveal" data-delay="0">
-      <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
-      <p class="testi-quote">עברתי מוורדפרס איטי ומסורבל לאתר חדש תוך שבוע. הלידים הכפילו את עצמם תוך חודש. הייתי ספקן — עכשיו אני ממליץ לכל עמית בתחום.</p>
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">
+        עברתי מוורדפרס איטי ומסורבל לאתר חדש תוך שבוע. הלידים הכפילו את עצמם תוך חודש. הייתי ספקן — עכשיו אני ממליץ לכל עמית בתחום.
+      </p>
       <div class="testi-result">📈 +112% לידים ב-30 יום</div>
       <div class="testi-author">
         <div class="testi-avatar">🏢</div>
-        <div><div class="testi-name">דוד לוי</div><div class="testi-role">Real Estate Manager · תל אביב</div></div>
+        <div>
+          <div class="testi-name">דוד לוי</div>
+          <div class="testi-role">Real Estate Manager · תל אביב</div>
+        </div>
       </div>
     </div>
+
+    <!-- Testimonial 2 — Clinic -->
     <div class="testi-card reveal" data-delay="1">
-      <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
-      <p class="testi-quote">קליניקה שלי עלתה לעמוד הראשון בגוגל תוך שלושה שבועות. מערכת קביעת התורים החכמה חסכה לי שעות של מענה טלפוני בכל שבוע.</p>
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">
+        קליניקה שלי עלתה לעמוד הראשון בגוגל תוך שלושה שבועות. מערכת קביעת התורים החכמה חסכה לי שעות של מענה טלפוני בכל שבוע.
+      </p>
       <div class="testi-result">🥇 עמוד 1 גוגל · חיסכון 8 שעות/שבוע</div>
       <div class="testi-author">
         <div class="testi-avatar">🏥</div>
-        <div><div class="testi-name">ד"ר מיכל כהן</div><div class="testi-role">Clinic Owner · ירושלים</div></div>
+        <div>
+          <div class="testi-name">ד"ר מיכל כהן</div>
+          <div class="testi-role">Clinic Owner · ירושלים</div>
+        </div>
       </div>
     </div>
+
+    <!-- Testimonial 3 — E-commerce -->
     <div class="testi-card reveal" data-delay="2">
-      <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
-      <p class="testi-quote">החנות שלי נטענת בפחות מחצי שניה. שיעור הנטישה ירד ב-60% ועל כל 100 גולשים — 38 קונים. זה לא עיצוב יפה, זה הנדסה של הכנסות.</p>
+      <div class="testi-stars">
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+        <span class="testi-star">★</span>
+      </div>
+      <p class="testi-quote">
+        החנות שלי נטענת בפחות מחצי שניה. שיעור הנטישה ירד ב-60% ועל כל 100 גולשים — 38 קונים. זה לא עיצוב יפה, זה הנדסה של הכנסות.
+      </p>
       <div class="testi-result">🛒 המרה +38% · נטישה -60%</div>
       <div class="testi-author">
         <div class="testi-avatar">🛍️</div>
-        <div><div class="testi-name">יוסי אברהם</div><div class="testi-role">E-commerce Founder · חיפה</div></div>
+        <div>
+          <div class="testi-name">יוסי אברהם</div>
+          <div class="testi-role">E-commerce Founder · חיפה</div>
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 </section>
@@ -1095,62 +1252,15 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 <div class="cta-bottom reveal">
   <div class="tag">Zohar AI Digital Solutions</div>
   <h2>מוכן לשדרג את<br>הנכס הדיגיטלי שלך?</h2>
-  <p>שיחת ייעוץ ראשונה — ללא עלות, ללא התחייבות.<br><a href="tel:+97277297072" style="color:#0070f3;text-decoration:none;direction:ltr;display:inline-block;" dir="ltr">+972-77-7297072</a></p>
+  <p>שיחת ייעוץ ראשונה — ללא עלות, ללא התחייבות.<br><a href="tel:+97277297072" style="color:#0070f3;text-decoration:none;direction:ltr;display:inline-block;">+972-77-7297072</a></p>
   <a class="cta-btn" href="https://wa.me/972555626040">שלח לנו הודעה בווטסאפ ←</a>
-
-  <!-- FIX 6: Privacy Policy trigger link -->
-  <div style="margin-top:1.5rem;">
-    <span class="pp-trigger" onclick="document.getElementById('ppModal').classList.add('open')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')document.getElementById('ppModal').classList.add('open')">
-      מדיניות פרטיות
-    </span>
-  </div>
 </div>
 
 </section>
 
 </main>
 
-<!-- FIX 6: Privacy Policy Modal -->
-<div class="pp-modal-overlay" id="ppModal" role="dialog" aria-modal="true" aria-labelledby="ppModalTitle" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="pp-modal">
-    <div class="pp-modal-head">
-      <h3 id="ppModalTitle">מדיניות פרטיות — Zohar AI Digital Solutions</h3>
-      <button class="pp-close" onclick="document.getElementById('ppModal').classList.remove('open')" aria-label="סגור">✕</button>
-    </div>
-    <div class="pp-modal-body">
-      <h4>1. כללי</h4>
-      <p>Zohar AI Digital Solutions ("החברה") מכבדת את פרטיות המשתמשים באתר זה. מדיניות זו מסבירה אילו מידע נאסף, כיצד הוא משמש, ואיך מוגנת הפרטיות שלך.</p>
-
-      <h4>2. איסוף מידע</h4>
-      <p>אנו אוספים מידע שאתה מספק מרצונך בעת יצירת קשר (שם, טלפון, כתובת מייל, תיאור הצורך). לא נאסף מידע ללא ידיעתך.</p>
-
-      <h4>3. שימוש במידע</h4>
-      <p>המידע ישמש אך ורק לצורך חזרה אליך, מתן הצעת מחיר, וניהול הקשר העסקי. לא נשתף את פרטיך עם צדדים שלישיים ללא הסכמתך המפורשת.</p>
-
-      <h4>4. אחסון ואבטחה</h4>
-      <p>המידע מאוחסן על שרתי Amazon AWS בסביבה מאובטחת עם הצפנת SSL מדרגה Enterprise. נוקטים בצעדי האבטחה המחמירים ביותר להגנה על נתוניך.</p>
-
-      <h4>5. עוגיות (Cookies)</h4>
-      <p>האתר עשוי לעשות שימוש בעוגיות לצורכי ניתוח סטטיסטי בסיסי בלבד. לא נשתמש בעוגיות לצרכי פרסום ממוקד.</p>
-
-      <h4>6. זכויותיך</h4>
-      <p>הנך זכאי לעיין במידע המאוחסן אודותיך, לבקש תיקונו, או מחיקתו בכל עת. לפנייה: <a href="mailto:info@zoharai.co.il" style="color:#7ab8ff;">info@zoharai.co.il</a></p>
-
-      <h4>7. שינויים במדיניות</h4>
-      <p>החברה שומרת לעצמה את הזכות לעדכן מדיניות זו. שינויים מהותיים יפורסמו באתר.</p>
-
-      <h4>8. יצירת קשר</h4>
-      <p>לכל שאלה בנוגע למדיניות הפרטיות, ניתן לפנות בטלפון <span dir="ltr">+972-77-7297072</span> או בוואטסאפ.</p>
-    </div>
-  </div>
-</div>
-
-<!-- FIX 6: Accessibility button -->
-<a class="a11y-btn" href="#" aria-label="נגישות" title="הצהרת נגישות" onclick="alert('אתר זה בנוי לתקני נגישות WCAG 2.1. לדיווח על בעיה: +972-77-7297072'); return false;">
-  ♿
-</a>
-
-<!-- WhatsApp float -->
+<!-- WhatsApp float with pulse -->
 <a class="wa-float" href="https://wa.me/972555626040" title="דברו איתנו בווטסאפ" aria-label="שלחו הודעה בווטסאפ">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -1168,17 +1278,63 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   const STAR_COUNT = window.innerWidth < 600 ? 140 : 260;
   const MAX_SPEED = 6;
   const TRAIL_LEN = 8;
-  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;cx=W/2;cy=H/2;}
+
+  function resize(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=window.innerHeight;
+    cx=W/2; cy=H/2;
+  }
   resize();
   window.addEventListener('resize',resize);
   window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
   window.addEventListener('touchmove',e=>{const t=e.touches[0];mouse.x=t.clientX;mouse.y=t.clientY;},{passive:true});
   window.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null;});
-  function makeStar(){const a=Math.random()*Math.PI*2;const d=Math.random()*Math.min(W,H)*0.06;return{x:cx+Math.cos(a)*d,y:cy+Math.sin(a)*d,speed:0.3+Math.pow(Math.random(),2)*MAX_SPEED,size:0.3+Math.random()*1.4,trail:[],hue:195+Math.random()*65,alpha:0.45+Math.random()*0.55};}
+
+  function makeStar(){
+    const a=Math.random()*Math.PI*2;
+    const d=Math.random()*Math.min(W,H)*0.06;
+    return{x:cx+Math.cos(a)*d,y:cy+Math.sin(a)*d,speed:0.3+Math.pow(Math.random(),2)*MAX_SPEED,size:0.3+Math.random()*1.4,trail:[],hue:195+Math.random()*65,alpha:0.45+Math.random()*0.55};
+  }
   let stars=Array.from({length:STAR_COUNT},makeStar);
-  function update(s){const dx=s.x-cx,dy=s.y-cy;const len=Math.sqrt(dx*dx+dy*dy)||0.001;const nx=dx/len,ny=dy/len;if(mouse.x!==null){const mx=s.x-mouse.x,my=s.y-mouse.y;const md=Math.sqrt(mx*mx+my*my);if(md<110){const f=(110-md)/110*1.6;s.x+=(mx/md)*f;s.y+=(my/md)*f;}}s.trail.unshift({x:s.x,y:s.y});if(s.trail.length>TRAIL_LEN)s.trail.pop();s.x+=nx*s.speed;s.y+=ny*s.speed;if(s.x<-20||s.x>W+20||s.y<-20||s.y>H+20){const ns=makeStar();Object.assign(s,ns);}}
-  function draw(s){const dist=Math.sqrt((s.x-cx)**2+(s.y-cy)**2);const maxD=Math.sqrt(cx*cx+cy*cy);const prog=Math.min(dist/maxD,1);const al=s.alpha*(0.25+prog*0.75);const sz=s.size*(0.5+prog*1.6);if(s.trail.length>1&&s.speed>1.2){ctx.beginPath();ctx.moveTo(s.trail[0].x,s.trail[0].y);for(let i=1;i<s.trail.length;i++)ctx.lineTo(s.trail[i].x,s.trail[i].y);ctx.strokeStyle=`hsla(${s.hue},88%,78%,${al*0.45*(s.speed/MAX_SPEED)})`;ctx.lineWidth=sz*0.55;ctx.stroke();}ctx.beginPath();ctx.arc(s.x,s.y,sz,0,Math.PI*2);ctx.fillStyle=`hsla(${s.hue},82%,92%,${al})`;ctx.fill();}
-  function frame(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{update(s);draw(s);});requestAnimationFrame(frame);}
+
+  function update(s){
+    const dx=s.x-cx,dy=s.y-cy;
+    const len=Math.sqrt(dx*dx+dy*dy)||0.001;
+    const nx=dx/len,ny=dy/len;
+    if(mouse.x!==null){
+      const mx=s.x-mouse.x,my=s.y-mouse.y;
+      const md=Math.sqrt(mx*mx+my*my);
+      if(md<110){const f=(110-md)/110*1.6;s.x+=(mx/md)*f;s.y+=(my/md)*f;}
+    }
+    s.trail.unshift({x:s.x,y:s.y});
+    if(s.trail.length>TRAIL_LEN)s.trail.pop();
+    s.x+=nx*s.speed; s.y+=ny*s.speed;
+    if(s.x<-20||s.x>W+20||s.y<-20||s.y>H+20){
+      const ns=makeStar(); Object.assign(s,ns);
+    }
+  }
+
+  function draw(s){
+    const dist=Math.sqrt((s.x-cx)**2+(s.y-cy)**2);
+    const maxD=Math.sqrt(cx*cx+cy*cy);
+    const prog=Math.min(dist/maxD,1);
+    const al=s.alpha*(0.25+prog*0.75);
+    const sz=s.size*(0.5+prog*1.6);
+    if(s.trail.length>1&&s.speed>1.2){
+      ctx.beginPath();ctx.moveTo(s.trail[0].x,s.trail[0].y);
+      for(let i=1;i<s.trail.length;i++)ctx.lineTo(s.trail[i].x,s.trail[i].y);
+      ctx.strokeStyle=`hsla(${s.hue},88%,78%,${al*0.45*(s.speed/MAX_SPEED)})`;
+      ctx.lineWidth=sz*0.55;ctx.stroke();
+    }
+    ctx.beginPath();ctx.arc(s.x,s.y,sz,0,Math.PI*2);
+    ctx.fillStyle=`hsla(${s.hue},82%,92%,${al})`;ctx.fill();
+  }
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{update(s);draw(s);});
+    requestAnimationFrame(frame);
+  }
   frame();
 })();
 
@@ -1186,7 +1342,16 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
 (function(){
   const els=document.querySelectorAll('.reveal');
   if(!els.length)return;
-  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const d=parseInt(e.target.dataset.delay||0,10);e.target.style.transitionDelay=d*55+'ms';e.target.classList.add('is-visible');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const d=parseInt(e.target.dataset.delay||0,10);
+        e.target.style.transitionDelay=d*55+'ms';
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
   els.forEach(el=>io.observe(el));
 })();
 
@@ -1202,8 +1367,21 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   ];
   let pi=0,ci=0,typing=true,pausing=false;
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  function render(){const p=phrases[pi],full=p.text+p.kw,disp=full.slice(0,ci),ks=p.text.length;target.innerHTML=ci<=ks?esc(disp):esc(p.text)+'<span class="key-glow">'+esc(disp.slice(ks))+'</span>';}
-  function tick(){const p=phrases[pi],full=p.text+p.kw;if(pausing){pausing=false;setTimeout(tick,1800);return;}if(typing){if(ci<full.length){ci++;render();setTimeout(tick,40+Math.random()*35);}else{typing=false;pausing=true;setTimeout(tick,1800);}}else{if(ci>0){ci--;render();setTimeout(tick,16);}else{typing=true;pi=(pi+1)%phrases.length;setTimeout(tick,320);}}}
+  function render(){
+    const p=phrases[pi],full=p.text+p.kw,disp=full.slice(0,ci),ks=p.text.length;
+    target.innerHTML=ci<=ks?esc(disp):esc(p.text)+'<span class="key-glow">'+esc(disp.slice(ks))+'</span>';
+  }
+  function tick(){
+    const p=phrases[pi],full=p.text+p.kw;
+    if(pausing){pausing=false;setTimeout(tick,1800);return;}
+    if(typing){
+      if(ci<full.length){ci++;render();setTimeout(tick,40+Math.random()*35);}
+      else{typing=false;pausing=true;setTimeout(tick,1800);}
+    }else{
+      if(ci>0){ci--;render();setTimeout(tick,16);}
+      else{typing=true;pi=(pi+1)%phrases.length;setTimeout(tick,320);}
+    }
+  }
   setTimeout(tick,900);
 })();
 
@@ -1212,17 +1390,26 @@ body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg-deep);color:#e
   const btn=document.getElementById('navHamburger');
   const links=document.getElementById('navLinks');
   if(!btn||!links)return;
-  btn.addEventListener('click',()=>{const open=links.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);});
-  links.querySelectorAll('a').forEach(a=>{a.addEventListener('click',()=>{links.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');});});
-  document.addEventListener('click',e=>{if(!btn.contains(e.target)&&!links.contains(e.target)){links.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
+  btn.addEventListener('click',()=>{
+    const open=links.classList.toggle('open');
+    btn.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',open);
+  });
+  links.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      links.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('click',e=>{
+    if(!btn.contains(e.target)&&!links.contains(e.target)){
+      links.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    }
+  });
 })();
-
-// FIX 6: Close modal on Escape key
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape') {
-    document.getElementById('ppModal').classList.remove('open');
-  }
-});
 </script>
 </body>
 </html>
